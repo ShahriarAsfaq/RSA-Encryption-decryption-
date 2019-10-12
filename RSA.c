@@ -47,11 +47,11 @@ void crypto(int e, int d, int N)
     printf("Your encrypted message will be:\n");
     for(i=0;i<strlen(a);i++){
         if(a[i]>='A' && a[i]<='Z'){
-          p=((a[i]-'A')^e)%N;
+          p=(int)pow((a[i]-'A'),e)%N;
           printf("%c",p+'A');
         }
         else if(a[i]>='a' && a[i]<='z'){
-            p=((a[i]-'a')^e)%N;
+            p=(int)pow((a[i]-'a'),e)%N;
             printf("%c",p+'a');
         }
         else
