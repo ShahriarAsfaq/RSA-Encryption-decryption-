@@ -14,16 +14,16 @@ void main()
     N=p*q;
     Q=(p-1)*(q-1);
     for(e=2;e<Q;e++){
-        if(fn(e,Q)==1)
+        if(fn(e,Q)==1&&fn(e,N)==1)
             break;
     }
-    for(d=rand()%100000;;d++){
-        if(d!=1 && (d*e)%Q==1){
-            break;
-        }
+    for(d=2;;d++){
+        if((d*e)%Q==1){
+            break;        }
     }
     encript(e,d,N);
-
+    decript(e,d,N);
+   
 }
 
 int fn(int a, int b)
@@ -44,16 +44,38 @@ void encript(int e, int d, int N)
     int p,i;
     printf("Enter the normal message:\n");
     fflush(stdin);
-    gets(a);
+    scanf("%s",a);
     printf("The encrypted message is:\n");
     for(i=0;i<strlen(a);i++){
         if(a[i]>='A' && a[i]<='Z'){
-          p=(int)(pow((a[i]-'A'),e))%N;
-          printf("%c",p+'A');
+          p=(int)(pow((a[i]-64),e))%N;
+          printf("%c",p+64);
         }
         else if(a[i]>='a' && a[i]<='z'){
-            p=(int)(pow((a[i]-'a'),e))%N;
-            printf("%c",p+'a');
+            p=(int)(pow((a[i]-96),e))%N;
+            printf("%c",p+96);
+        }
+        else
+            printf("%c",a[i]);
+    }
+}
+
+void decript(int e, int d, int N)
+{
+    char a[1000];
+    int p,i;
+    printf("\nEnter the encrypted message:\n");
+    fflush(stdin);
+    scanf("%s",a);
+    printf("The decrypted message is:\n");
+    for(i=0;i<strlen(a);i++){
+        if(a[i]>='A' && a[i]<='Z'){
+          p=(int)(pow((a[i]-64),d))%N;
+          printf("%c",p+64);
+        }
+        else if(a[i]>='a' && a[i]<='z'){
+            p=(int)(pow((a[i]-96),d))%N;
+            printf("%c",p+96);
         }
         else
             printf("%c",a[i]);
